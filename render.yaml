@@ -29,7 +29,7 @@ services:
     runtime: static
     branch: main
     rootDir: Frontend
-    buildCommand: npm install npm run dev
+    buildCommand: npm ci --legacy-peer-deps && npm run build
     staticPublishPath: ./dist
     routes:
       - type: rewrite

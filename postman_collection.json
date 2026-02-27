@@ -1,0 +1,703 @@
+{
+  "info": {
+    "name": "CivicEye API",
+    "description": "Complete API collection for CivicEye platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "TOKEN",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Citizen Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"phone\": \"+1234567890\",\n  \"city\": \"New Delhi\",\n  \"ward\": \"Ward 15\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/citizen/signup",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "citizen", "signup"]
+            }
+          }
+        },
+        {
+          "name": "Citizen Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"TOKEN\", jsonData.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/citizen/login",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "citizen", "login"]
+            }
+          }
+        },
+        {
+          "name": "Government Signup",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"Jane Smith\",\n  \"email\": \"jane@gov.in\",\n  \"password\": \"password123\",\n  \"phone\": \"+1234567890\",\n  \"inviteToken\": \"YOUR_INVITE_TOKEN\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/government/signup",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "government", "signup"]
+            }
+          }
+        },
+        {
+          "name": "Government Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"TOKEN\", jsonData.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jane@gov.in\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/government/login",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "government", "login"]
+            }
+          }
+        },
+        {
+          "name": "Admin Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set(\"TOKEN\", jsonData.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@civiceye.com\",\n  \"password\": \"Admin@123\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/admin/login",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "admin", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/auth/me",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fullName\": \"John Updated\",\n  \"phone\": \"+9876543210\",\n  \"city\": \"Mumbai\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/profile",
+              "host": ["{{BASE_URL}}"],
+              "path": ["auth", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Issues",
+      "item": [
+        {
+          "name": "Report Issue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Large pothole on Main Street",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Dangerous pothole causing traffic issues",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "pothole",
+                  "type": "text"
+                },
+                {
+                  "key": "severity",
+                  "value": "high",
+                  "type": "text"
+                },
+                {
+                  "key": "latitude",
+                  "value": "28.6139",
+                  "type": "text"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.2090",
+                  "type": "text"
+                },
+                {
+                  "key": "address",
+                  "value": "Main Street, Sector 15",
+                  "type": "text"
+                },
+                {
+                  "key": "city",
+                  "value": "New Delhi",
+                  "type": "text"
+                },
+                {
+                  "key": "area",
+                  "value": "Sector 15",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/issues/report",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", "report"]
+            }
+          }
+        },
+        {
+          "name": "Get My Complaints",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/issues/my-complaints?page=1&limit=10",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", "my-complaints"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "reported",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Issues",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/issues/all?page=1&limit=20",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", "all"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "status",
+                  "value": "reported",
+                  "disabled": true
+                },
+                {
+                  "key": "category",
+                  "value": "pothole",
+                  "disabled": true
+                },
+                {
+                  "key": "severity",
+                  "value": "high",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Issue Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/issues/stats",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Single Issue",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/issues/:id",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ISSUE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Resolve Issue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/issues/:id/resolve",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", ":id", "resolve"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ISSUE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Issue Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in_progress\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/issues/:id/status",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", ":id", "status"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ISSUE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Upvote Issue",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/issues/:id/upvote",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", ":id", "upvote"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ISSUE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"This issue is affecting many residents\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/issues/:id/comment",
+              "host": ["{{BASE_URL}}"],
+              "path": ["issues", ":id", "comment"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ISSUE_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get System Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/stats",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Pending Approvals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/users/pending",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "users", "pending"]
+            }
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/users?page=1&limit=20",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "role",
+                  "value": "government",
+                  "disabled": true
+                },
+                {
+                  "key": "status",
+                  "value": "active",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/users/:id/approve",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "users", ":id", "approve"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "USER_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Reject User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/users/:id/reject",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "users", ":id", "reject"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "USER_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Generate Invite",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"newofficial@gov.in\",\n  \"department\": \"Sanitation\",\n  \"position\": \"Supervisor\",\n  \"assignedArea\": \"Sector 21-25\"\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/admin/invite/generate",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "invite", "generate"]
+            }
+          }
+        },
+        {
+          "name": "List Invites",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/admin/invite/list",
+              "host": ["{{BASE_URL}}"],
+              "path": ["admin", "invite", "list"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leaderboard",
+      "item": [
+        {
+          "name": "Get Leaderboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/leaderboard?limit=20",
+              "host": ["{{BASE_URL}}"],
+              "path": ["leaderboard"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

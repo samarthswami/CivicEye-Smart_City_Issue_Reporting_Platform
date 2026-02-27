@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        @apply border-gray-200 dark:border-gray-800;
+    }
+
+    body {
+        @apply bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans;
+        font-family: 'Inter', system-ui, sans-serif;
+    }
+}
+
+@layer components {
+    .btn-primary {
+        @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2.5 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-secondary {
+        @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 font-semibold py-2.5 px-6 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md active:scale-95;
+    }
+
+    .btn-danger {
+        @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 px-6 rounded-xl transition-all duration-200 active:scale-95;
+    }
+
+    .btn-success {
+        @apply bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-6 rounded-xl transition-all duration-200 active:scale-95;
+    }
+
+    .card {
+        @apply bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-6;
+    }
+
+    .card-hover {
+        @apply card hover:shadow-md hover:-translate-y-0.5 transition-all duration-200;
+    }
+
+    .input-field {
+        @apply w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+    }
+
+    .label {
+        @apply block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5;
+    }
+
+    .badge {
+        @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold;
+    }
+
+    .sidebar-link {
+        @apply flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-150 font-medium;
+    }
+
+    .sidebar-link.active {
+        @apply bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300;
+    }
+
+    .stat-card {
+        @apply card flex items-center gap-4;
+    }
+
+    .gradient-text {
+        @apply bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent;
+    }
+}
+
+@layer utilities {
+    .scrollbar-thin {
+        scrollbar-width: thin;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* Status badge colors */
+.status-reported {
+    @apply bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300;
+}
+
+.status-assigned {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300;
+}
+
+.status-in_progress {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300;
+}
+
+.status-resolved {
+    @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300;
+}
+
+.status-closed {
+    @apply bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400;
+}
+
+/* Severity badge colors */
+.severity-low {
+    @apply bg-sky-100 text-sky-800 dark:bg-sky-900/30 dark:text-sky-300;
+}
+
+.severity-medium {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300;
+}
+
+.severity-high {
+    @apply bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300;
+}
+
+.severity-critical {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300;
+}
+
+/* Leaflet map container */
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem;
+    z-index: 0;
+}
+
+/* Smooth page transitions */
+.page-enter {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.dark .skeleton {
+    background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+    background-size: 200% 100%;
+}

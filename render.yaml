@@ -27,7 +27,6 @@ services:
   - type: web
     name: civiceye-frontend
     runtime: static
-    plan: free
     branch: main
     rootDir: Frontend
     buildCommand: npm install && npm run build

@@ -19,7 +19,6 @@ services:
         sync: false
       - key: JWT_SECRET
         generateValue: true
-        sync: false
       - key: FRONTEND_URL
         sync: false
     autoDeploy: true
@@ -28,7 +27,6 @@ services:
   - type: web
     name: civiceye-frontend
     runtime: static
-    region: oregon
     plan: free
     branch: main
     rootDir: Frontend

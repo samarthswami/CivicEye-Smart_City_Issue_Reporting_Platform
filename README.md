@@ -1,6 +1,6 @@
 # CivicEye - Smart City Issue Reporting Platform
 
-![CivicEye Logo](Frontend/Public/img/Logo.png)
+![CivicEye Logo](Frontend/Public/img/logo.png)
 
 **Transform citizen complaints into actionable urban insights**
 
@@ -364,8 +364,7 @@ Built with ❤️ for Smart Cities
 
 For issues and questions:
 - Create an issue on GitHub
-- Check SETUP_INSTRUCTIONS.md for detailed setup
-
+  
 ---
 
 **Made with React, Node.js, and MongoDB**
